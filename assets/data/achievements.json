@@ -1,0 +1,116 @@
+{
+    "First Blood": {
+        "description": "I killed 1 enemy",
+        "stat": "enemies_destroyed",
+        "goal": 1
+    },
+
+    "Serial Killer": {
+        "description": "I killed 100 enemies",
+        "stat": "enemies_destroyed",
+        "goal": 100
+    },
+
+    "Slaughterer": {
+        "description": "I killed 500 enemies",
+        "stat": "enemies_destroyed",
+        "goal": 500
+    },
+    "Mass Murderer": {
+        "description": "I killed 500 enemies",
+        "stat": "enemies_destroyed",
+        "goal": 1000
+    },
+    "Renovator": {
+        "description": "I collected my first upgrade",
+	  "stat": "upgrades_collected",
+        "goal": 1
+    },
+
+    "Collector": {
+        "description": "I collected 25 upgrades",
+        "stat": "upgrades_collected",
+        "goal": 25
+    },
+
+    "Basic Bomb Boy": {
+        "description": "I used 2 bombs",
+        "stat": "bombs_used",
+        "goal": 1
+    },
+    "Bomberman": {
+        "description": "I used 2 bombs",
+        "stat": "bombs_used",
+        "goal": 5
+    },
+
+    "Grenadier": {
+        "description": "I used 50 bombs",
+        "stat": "bombs_used",
+        "goal": 50
+    },
+
+    "Torpedo Novice": {
+        "description": "I used 5 torpedoes",
+        "stat": "torpedoes_used",
+        "goal": 5
+    },
+
+    "Torpedo Expert": {
+        "description": "I used 50 torpedoes",
+        "stat": "torpedoes_used",
+        "goal": 50
+    },
+    "Torpedo Master": {
+        "description": "I used 100 torpedoes",
+        "stat": "torpedoes_used",
+        "goal": 100
+    },
+    "Torpedo Wizard": {
+        "description": "I used 150 torpedoes",
+        "stat": "torpedoes_used",
+        "goal": 150
+    },
+
+    "Planetary Warfare": {
+        "description": "I destroyed 1 planet",
+        "stat": "planets_destroyed",
+        "goal": 1
+    },
+
+    "Death Star": {
+        "description": "I destroyed 5 planets",
+        "stat": "planets_destroyed",
+        "goal": 5
+    },
+
+    "Emergency Landing": {
+        "description": "I collided with a planet",
+        "stat": "planet_collisions",
+        "goal": 1
+    },
+    "Danger Lover": {
+        "description": "I collided with 5 planets",
+        "stat": "planet_collisions",
+        "goal": 5
+    },
+
+    "Nuker": {
+        "description": "I blew up 50 enemies",
+	  "stat": "bomb_kills",
+        "goal": 50
+
+    },
+
+    "Escape Artist": {
+        "description": "I was down to one life and no shields"
+    },
+
+    "Sniper": {
+        "description": "My shooting accuracy reached 90% with 250 shots"
+    },
+
+    "Untouchable": {
+        "description": "I reached 500 points without losing a life or shield"
+    }
+}
