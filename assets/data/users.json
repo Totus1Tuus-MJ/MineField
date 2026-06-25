@@ -1,0 +1,56 @@
+{
+    "users": [
+        {
+            "username": "Mario Wilson",
+            "password": "1fluffykoala@",
+            "role": "admin",
+            "tokens": 0
+        },
+        {
+            "username": "Peter",
+            "password": "Peter",
+            "role": "user",
+            "tokens": 5
+        },
+        {
+            "username": "Anna",
+            "password": "Anna",
+            "role": "user",
+            "tokens": 0
+        },
+        {
+            "username": "Bern",
+            "password": "Bern",
+            "role": "user",
+            "tokens": 5
+        },
+        {
+            "username": "",
+            "password": "",
+            "role": "user",
+            "tokens": 44,
+            "achievements": [
+                "First Blood",
+                "Renovator",
+                "Escape Artist",
+                "Torpedo Novice",
+                "Basic Bomb Boy",
+                "Untouchable",
+                "Bomberman",
+                "Serial Killer",
+                "Planetary Warfare",
+                "Nuker",
+                "Slaughterer",
+                "Torpedo Expert",
+                "Collector",
+                "Mass Murderer",
+                "Emergency Landing",
+                "Death Star",
+                "Grenadier",
+                "Torpedo Master",
+                "Torpedo Wizard",
+                "Danger Lover"
+            ]
+        }
+    ]
+}
