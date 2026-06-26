@@ -22,6 +22,7 @@ def handle_events(state, events, sounds):
                 audio.play_sound(state, sounds["enemy"])
 
         elif event["type"] == "player_hit":
+            audio.play_sound(state,sounds["death"])
             if state.shields > 0:
                 state.shields -= 1
             else:

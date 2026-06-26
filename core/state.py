@@ -26,6 +26,7 @@ class State:
         ## Game
         self.game_going = True
         self.show_achievements = False
+        self.show_instructions = False
         self.game_over = False
         self.paused = False
         self.music_off = False

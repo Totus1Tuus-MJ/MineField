@@ -15,7 +15,21 @@ def handle(state, keys):
         if event.type == pygame.QUIT:
             game_flow.stop_game(True, state, sounds)
         
-        if state.paused:
+        # Global Instruction Toggle
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_i:
+            state.show_instructions = not state.show_instructions
+            if state.show_instructions:
+                state.paused = True
+                state.game_going = False
+            elif not state.show_achievements:
+                # Only resume if we aren't also in achievements
+                state.paused = False
+                state.game_going = True
+            continue
+
+        if state.show_instructions:
+            handle_instructions_input(event, state)
+        elif state.paused:
             handle_pause_input(event, state)
         else:
             if event.type == pygame.KEYDOWN:
@@ -27,6 +41,7 @@ def handle(state, keys):
                 quit_button = getattr(state, 'quit_button', None)
                 if quit_button and quit_button.rect.collidepoint(event.pos):
                     quit_button.click()
+        
         if not state.paused and not state.game_going:
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
@@ -34,6 +49,16 @@ def handle(state, keys):
 
     if state.game_going:
         handle_game_going_input(state, keys)
+
+def handle_instructions_input(event, state):
+    sounds = getattr(state, 'sounds', {})
+    if event.type == pygame.KEYDOWN:
+        if event.key == pygame.K_q:
+            game_flow.stop_game(True, state, sounds)
+    elif event.type == pygame.MOUSEBUTTONDOWN:
+        quit_button = getattr(state, 'quit_button', None)
+        if quit_button and quit_button.rect.collidepoint(event.pos):
+            quit_button.click()
 
 def handle_pause_input(event, state):
     sounds = getattr(state, 'sounds', {})
@@ -54,6 +79,7 @@ def handle_pause_input(event, state):
             state.paused = False
             state.game_going = True
             state.show_achievements = False
+            state.show_instructions = False
             return
 
     if not state.show_achievements:
@@ -69,7 +95,7 @@ def handle_pause_input(event, state):
                 audio.toggle_sounds(state)
             elif event.key == pygame.K_m:
                 audio.toggle_music(state)
-    else:
+    elif state.show_achievements:
         if event.type == pygame.MOUSEBUTTONDOWN:
             quit_button = getattr(state, 'quit_button', None)
             if quit_button and quit_button.rect.collidepoint(event.pos):

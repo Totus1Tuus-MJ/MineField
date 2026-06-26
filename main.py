@@ -12,7 +12,7 @@ from ui.login_screen import login_screen
 state = State(width=1550, height=950)
 screen, reg_font, small_font, clock = setup.pre_login_init()
 
-user = login_screen(screen, reg_font, small_font)
+user = login_screen(screen, reg_font, small_font, quit_button = None)
 
 if user is None:
     game_flow.stop_game(False, state, None)

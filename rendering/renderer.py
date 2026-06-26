@@ -1,6 +1,6 @@
 ## drawing.py
 from ui.colors import Color
-from ui.ui import draw_hud, draw_game_over, draw_pause_menu, draw_achievements_screen
+from ui.ui import draw_hud, draw_game_over, draw_pause_menu, draw_achievements_screen, draw_instructions_screen
 
 
 import config
@@ -34,9 +34,11 @@ def draw_game(screen, state, sprites, reg_font, small_font, high_score, pause_bu
         draw_game_over(screen, state, reg_font, small_font, performance, quit_button)
 
     if state.paused:
-        if not state.show_achievements:
-            draw_pause_menu(screen, state, reg_font, pause_buttons, quit_button)
-        else:
+        if state.show_instructions:
+            draw_instructions_screen(screen, state, reg_font, small_font, quit_button)
+        elif state.show_achievements:
             draw_achievements_screen(screen, state, reg_font, small_font, achievements_buttons, quit_button)
+        else:
+            draw_pause_menu(screen, state, reg_font, small_font, pause_buttons, quit_button)
 
 

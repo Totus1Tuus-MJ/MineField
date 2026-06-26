@@ -48,17 +48,3 @@ def get_tokens(username):
 
     return 0
 
-def grant_tokens(current_user, recipient, gift):
-
-    if current_user["role"] != "admin":
-        return False
-    data = load_directory()
-
-    for user in data["users"]:
-
-        if user["username"] == recipient:
-            user["tokens"] += gift
-            save_directory(data)
-            return True
-        
-    return False
