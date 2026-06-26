@@ -1,10 +1,10 @@
 ## movement.py
 
 import random
-import audio
+from services import audio
 import config
-from explosion import Explosion
-from upgrade import Upgrade
+from entities.explosion import Explosion
+from entities.upgrade import Upgrade
 
 def move_planets(state, dt):
     for planet in state.planets[:]:
@@ -33,7 +33,6 @@ def move_upgrades(state, dt):
 
         if upgrade.off_screen(config.HEIGHT):
             state.upgrades.remove(upgrade)
-            state.upgrades.append(Upgrade(random.randint(0, config.WIDTH - state.upgrade_size), -state.upgrade_size, state.upgrade_size, state.upgrade_speed, 5))
 
 def move_bullets(state, dt):
     for bullet in state.bullets[:]:
@@ -49,27 +48,11 @@ def move_torpedoes(state, dt):
         if torpedo.off_screen():
             state.torpedoes.remove(torpedo)
 
-def move_bombs(state, dt, bomb_sound):
-    for bomb in state.bomb_list[:]:
+def move_bombs(state, dt):
+    for bomb in state.bomb_list:
         bomb.move(dt)
 
-        if bomb.detonated:
-            audio.play_sound(state, bomb_sound)
-
-            for enemy in state.enemies[:]:
-                state.bomb_kills += 1
-                state.enemies_destroyed += 1
-                state.explosions.append(Explosion(enemy.x + enemy.size // 2, enemy.y + enemy.size // 2))
-
-            for planet in state.planets[:]:
-                state.planets_destroyed += 1
-                state.explosions.append(Explosion(planet.x, planet.y, planet.radius * 2))
-            state.score += len(state.enemies) * 8
-            state.enemies.clear()
-            state.planets.clear()
-            state.upgrades.clear()
-            state.bomb_list.remove(bomb)
-
+ 
 def move_explosions(state, dt):
     for explosion in state.explosions[:]:
         explosion.move(dt)
@@ -77,13 +60,13 @@ def move_explosions(state, dt):
         if explosion.finished:
             state.explosions.remove(explosion)
 
-def move_game(state, dt, sound):
+def move_game(state, dt):
     move_planets(state, dt)
     move_stars(state, dt)
     move_enemies(state, dt)
     move_upgrades(state, dt)
     move_bullets(state, dt)
     move_torpedoes(state, dt)
-    move_bombs(state, dt, sound)
+    move_bombs(state, dt)
     move_explosions(state, dt)
     

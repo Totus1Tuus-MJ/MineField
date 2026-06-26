@@ -1,7 +1,7 @@
 ## drawing.py
 
-from colors import Color
-from ui import draw_hud, draw_game_over, draw_pause_menu, draw_achievements_screen
+from ui.colors import Color
+from ui.ui import draw_hud, draw_game_over, draw_pause_menu, draw_achievements_screen
 
 import config
 

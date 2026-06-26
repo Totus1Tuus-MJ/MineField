@@ -14,6 +14,7 @@ class Torpedo:
     def move(self, dt):
         self.y -= self.speed * dt
 
+
     def off_screen(self):
         return self.y < -self.y_size
 

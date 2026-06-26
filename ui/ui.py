@@ -1,12 +1,10 @@
 #ui.py
 
-from colors import Color
+from ui.colors import Color
 import config
 import pygame
-import game_logic
-import login
-import asset_loader
-import achievements
+from services import login
+from systems import achievements
 
 def draw_hud(screen, state, reg_font, small_font, high_score, hud_icons):
 

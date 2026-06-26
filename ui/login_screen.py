@@ -1,10 +1,10 @@
 ## login_screen.py
 
 import pygame
-from login import check_credentials
-from colors import Color
-import game_logic
-from ui import message_screen
+from services.login import check_credentials
+from ui.colors import Color
+from core import game_flow
+from ui.ui import message_screen
 
 def login_screen(screen, reg_font, small_font):
     username = ""

@@ -1,10 +1,10 @@
 ## achievements.py
 import json
 import pygame
-import login
+from services import login
 
 def load_achievements():
-    with open("achievements.json") as file:
+    with open("assets/data/achievements.json") as file:
         data = json.load(file)
     achievements = {}
 

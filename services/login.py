@@ -2,7 +2,7 @@
 
 import json
 
-DIRECTORY_FILE = "users.json"
+DIRECTORY_FILE = "assets/data/users.json"
 
 def load_directory():
     with open(DIRECTORY_FILE, "r") as file:

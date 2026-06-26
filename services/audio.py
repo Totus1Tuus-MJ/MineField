@@ -1,4 +1,5 @@
 ## audio.py
+import pygame
 
 def play_sound(state, sound):
     if not state.sounds_off:

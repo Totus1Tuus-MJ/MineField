@@ -1,10 +1,10 @@
 ## background.py
 
 import random
-from colors import Color
+from ui.colors import Color
 import config
 
-from space import Star
+from entities.background_entities import Star
 
 
 def init(state):

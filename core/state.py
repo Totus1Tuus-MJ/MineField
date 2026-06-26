@@ -1,25 +1,28 @@
 ## state.py
 
 import pygame
-from player import Player
-import achievements
+from entities.player import Player
+from systems import achievements
 
 class State:
-    def __init__(self, WIDTH, HEIGHT):
+    def __init__(self, width, height):
         self.current_user = None
-        self.restart(WIDTH, HEIGHT)
+        self.width = width
+        self.height = height
+        self.restart(width, height)
 
 
     def load_user(self, user):
         self.current_user = user
         achievements.load_completed(self)
         
-    def restart(self, WIDTH, HEIGHT):
+    def restart(self, width, height):
 
-        ##===================================================
-        ## Game Elements
-        ##==================================================
-        
+        ## ==========================================
+        ## Game FLAGS
+        ## ==========================================
+
+
         ## Game
         self.game_going = True
         self.show_achievements = False
@@ -28,16 +31,27 @@ class State:
         self.music_off = False
         self.sounds_off = False
         self.movement_sound_playing = False
-        self.score = 0
+
+        ## ==========================================
 
         ## Player
-        self.player = Player(WIDTH // 2, HEIGHT - 25, 25, 750, 400)
+        ## ==========================================
+
+
+        self.player = Player(width // 2, height - 25, 25, 750, 400)
         self.lives = 3
         self.shields = 0
 
-        self.achievement_message = ""
-        self.achievement_timer = 0
-        
+
+        ## ==========================================
+
+        ## Scores / Stats
+        ## ==========================================
+
+        self.score = 0
+        self.hits = 0
+        self.shots_fired = 0
+
         self.enemies_destroyed = 0
         self.upgrades_collected = 0
         self.bombs_used = 0
@@ -47,42 +61,63 @@ class State:
         self.torpedoes_used = 0
         self.shields_lost = 0
         self.lives_lost = 0
-        
-        
 
+
+        ## ==========================================
         ## Enemies
+        ## ==========================================
         self.enemies = []
         self.enemy_speed = 250
         self.spawn_delay = 500
         self.last_spawn = 0
         self.spawn_delay_benefit = 0
 
+        self.enemy_size = 50
+        self.max_enemies = 50
+        self.max_enemy_speed = 1500
+        self.min_spawn_delay = 25
+
+
+        ## ==========================================
         ## Bullets
+        ## ==========================================
         self.bullets = []
         self.bullet_size = 15
         self.bullet_speed = 1500
         self.reload_cooldown = 100
         self.last_shot = 0
-        self.hits = 0
-        self.shots_fired = 0
         self.accuracy = self.hits / self.shots_fired if self.shots_fired else 1
 
+        self.max_bullet_speed = 2500
 
+        ## ==========================================
         ## Bombs
+        ## ==========================================
         self.last_bombed = 0
         self.bombs = 1
         self.bomb_list = []
         self.bomb_checkpoint = 0
         self.bomb_gain_interval = 250
 
+        self.bomb_wait_time = 2000
+
+        ## ==========================================
         ## Torpedoes
+        ## ==========================================
         self.torpedoes = []
         self.torpedo_gain_interval = 100
         self.torpedo_count = 5
         self.last_torpedoed = 0
         self.torpedo_checkpoint = 0
-        
+
+        self.torpedo_x_size = 67
+        self.torpedo_y_size = 100
+        self.torpedo_speed = 1200
+        self.torpedo_reload = 1500
+
+        ## ==========================================
         ## Upgrades
+        ## ==========================================
         self.upgrades = []
         self.upgrade_speed = self.enemy_speed + 5
         self.upgrade_slowdown = 0
@@ -92,40 +127,27 @@ class State:
         self.effect = None
         self.active_effects = []
 
-        ## BackGround
-        self.stars = []
-        
-        self.planets = []
-        self.last_planet_spawn = 0
-
-        ## Explosions
-        self.explosions = []
-
-        ## ================================================================
-        ## Game Config
-        ## ================================================================
-        
-        ## Enemies
-        self.enemy_size = 50
-        self.max_enemies = 50
-        self.max_enemy_speed = 1500
-        self.min_spawn_delay = 25
-
-        ## Weapons        
-        self.bomb_wait_time = 2000
-        self.max_bullet_speed = 2500
-        self.torpedo_x_size = 67
-        self.torpedo_y_size = 100
-        self.torpedo_speed = 1200
-        self.torpedo_reload = 1500
-
-        ## Upgrades
         self.min_upgrade_speed = 5
         self.upgrade_size = 35
 
-        ## BackGround
+        ## ==========================================
+        ## WORLD
+        ## ==========================================
+        self.stars = []
+        self.planets = []
+        self.last_planet_spawn = 0
         self.planet_spawn_delay = 15000
 
+        ## ==========================================
+        ## Explosions
+        ## ==========================================
+        self.explosions = []
+
+        ## ==========================================
+        ## Achievements
+        ## ==========================================
         self.achievements = achievements.load_achievements()
         achievements.load_completed(self)
         self.achievements_completed, self.total_achievements = achievements.get_achievement_progress(self)
+        self.achievement_message = ""
+        self.achievement_timer = 0

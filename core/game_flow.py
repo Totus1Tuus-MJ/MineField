@@ -1,33 +1,25 @@
-## game_logic.py
+## game_flow.py
 
 import pygame
 import sys
 
-import achievements
-import audio
-import background
+import systems.achievements
+import services.audio
+from  rendering import background
 import config
-import login
-from ui import message_screen
-import weapons
+from services import login
+import ui.ui
+import systems.weapons
 
 def stop_game(should_play_sound, state, sounds = None):
     if should_play_sound and sounds:
-        audio.play_sound(state, sounds["game_over"])
+        services.audio.play_sound(state, sounds["game_over"])
         pygame.time.wait(3000)
     pygame.quit()
     sys.exit()
 
 
-def update_difficulty(state):
-    state.enemy_speed = min (state.max_enemy_speed, 250 + state.score ** 0.75)
-    state.spawn_delay = max(state.min_spawn_delay, 500 - (state.score * 0.5) + state.spawn_delay_benefit)
-    state.upgrade_speed = state.enemy_speed + 5
-    state.shields = min(state.shields, 12)
-    state.torpedo_count, state.torpedo_checkpoint = weapons.collect_firearms(state.score, state.torpedo_checkpoint, state.torpedo_gain_interval, state.torpedo_count)    
 
-    state.bombs, state.bomb_checkpoint = weapons.collect_firearms(state.score, state.bomb_checkpoint, state.bomb_gain_interval, state.bombs)
-  
 def restart_game(state):
     state.restart(config.WIDTH, config.HEIGHT)
     background.init(state)

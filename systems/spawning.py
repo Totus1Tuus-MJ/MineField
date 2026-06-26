@@ -4,10 +4,10 @@ import random
 import pygame
 
 import config
-from enemy import Enemy
-from upgrade import Upgrade
-from space import Planet
-from colors import Color 
+from entities.enemy import Enemy
+from entities.upgrade import Upgrade
+from entities.background_entities import Planet
+from ui.colors import Color
 
 
 def spawn_planets(state, current_time, planet_sprites):
@@ -27,9 +27,9 @@ def spawn_upgrades(state, current_time):
             state.upgrades.append(Upgrade(random.randint(0, config.WIDTH - state.upgrade_size), -state.upgrade_size, 35, state.upgrade_speed, 5))
             state.last_payload = current_time
 
-def spawn_game(state, planet_sprite):
+def spawn_game(state, planet_sprites):
     current_time = pygame.time.get_ticks()
 
-    spawn_planets(state, current_time, planet_sprite)
+    spawn_planets(state, current_time, planet_sprites)
     spawn_enemies(state, current_time)
     spawn_upgrades(state, current_time)

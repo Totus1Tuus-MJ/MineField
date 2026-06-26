@@ -10,7 +10,15 @@
             "username": "Peter",
             "password": "Peter",
             "role": "user",
-            "tokens": 5
+            "tokens": 4,
+            "achievements": [
+                "First Blood",
+                "Renovator",
+                "Escape Artist",
+                "Basic Bomb Boy",
+                "Bomberman",
+                "Sniper"
+            ]
         },
         {
             "username": "Anna",
@@ -28,7 +36,7 @@
             "username": "",
             "password": "",
             "role": "user",
-            "tokens": 44,
+            "tokens": 25,
             "achievements": [
                 "First Blood",
                 "Renovator",
@@ -49,7 +57,8 @@
                 "Grenadier",
                 "Torpedo Master",
                 "Torpedo Wizard",
-                "Danger Lover"
+                "Danger Lover",
+                "Sniper"
             ]
         }
     ]
