@@ -12,9 +12,9 @@ class Button:
     def click(self):
         self.callback()
 
-    def draw(self, screen, reg_font, Color):
-        pygame.draw.rect(screen, Color.DARK_GRAY, self.rect)
-        pygame.draw.rect(screen, Color.WHITE, self.rect, 2)
+    def draw(self, screen, reg_font,Color, button_color, outline_color):
+        pygame.draw.rect(screen, button_color, self.rect)
+        pygame.draw.rect(screen, outline_color, self.rect, 2)
 
         text = self.get_text()
         

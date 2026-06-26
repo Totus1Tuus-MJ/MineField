@@ -4,13 +4,23 @@
             "username": "Mario Wilson",
             "password": "1fluffykoala@",
             "role": "admin",
-            "tokens": 0
+            "tokens": 999999,
+            "achievements": [
+                "First Blood",
+                "Renovator",
+                "Planetary Warfare",
+                "Untouchable",
+                "Basic Bomb Boy",
+                "Serial Killer",
+                "Sniper",
+                "Escape Artist"
+            ]
         },
         {
             "username": "Peter",
             "password": "Peter",
             "role": "user",
-            "tokens": 4,
+            "tokens": 5,
             "achievements": [
                 "First Blood",
                 "Renovator",
@@ -24,7 +34,7 @@
             "username": "Anna",
             "password": "Anna",
             "role": "user",
-            "tokens": 0
+            "tokens": 3
         },
         {
             "username": "Bern",
@@ -36,7 +46,7 @@
             "username": "",
             "password": "",
             "role": "user",
-            "tokens": 25,
+            "tokens": 149607,
             "achievements": [
                 "First Blood",
                 "Renovator",

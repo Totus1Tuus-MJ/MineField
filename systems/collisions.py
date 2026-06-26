@@ -1,9 +1,3 @@
-## collision.py
-
-from core import game_flow
-from services import audio
-from systems.upgrade_effects import grant_reward
-from entities.explosion import Explosion
 
 import pygame
 import math
@@ -15,7 +9,9 @@ def check_collisions(state):
     events += player_enemy_collisions(state)
     events += upgrade_player_collisions(state)
     events += torpedo_enemy_collisions(state)
-    events += bomb_enemy_collisions(state)
+    events += torpedo_planet_collisions(state)
+    events += torpedo_upgrade_collisions(state)
+    events += bomb_collisions(state)
     events += player_planet_collisions(state)
 
     return events
@@ -54,7 +50,8 @@ def player_enemy_collisions(state):
 
             events.append({
                 "type": "player_hit",
-                "enemy": enemy
+                "enemy": enemy,
+                "source": "player"
             })
 
     return events
@@ -71,7 +68,9 @@ def upgrade_player_collisions(state):
 
             events.append({
                 "type": "upgrade_collected",
-                "upgrade": upgrade
+                "source": "player",
+                "upgrade": upgrade,
+                "is_bomb_kill": False
             })
 
     return events
@@ -80,47 +79,77 @@ def upgrade_player_collisions(state):
 def torpedo_enemy_collisions(state):
     events = []
 
-    for torpedo in state.torpedoes[:]:
+    for torpedo in state.torpedoes:
         t_rect = torpedo.rect()
 
         for enemy in state.enemies[:]:
             if t_rect.colliderect(enemy.rect()):
                 state.enemies.remove(enemy)
-                if torpedo in state.torpedoes:
-                    state.torpedoes.remove(torpedo)
-
                 events.append({
                     "type": "enemy_killed",
                     "source": "torpedo",
-                    "enemy": enemy
+                    "enemy": enemy,
+                    "is_bomb_kill": False
                 })
-                break
-
     return events
 
-def bomb_enemy_collisions(state):
+def torpedo_planet_collisions(state):
+    events = []
+    for torpedo in state.torpedoes:
+        t_rect = torpedo.rect()
+        for planet in state.planets[:]:
+            if t_rect.colliderect(planet.rect()):
+                state.planets.remove(planet)
+                state.planets_destroyed += 1
+                events.append({
+                    "type": "planet_destroyed",
+                    "source": "torpedo",
+                    "planet": planet,
+                    "is_bomb_kill": False
+                })
+    return events
+
+def torpedo_upgrade_collisions(state):
+    for torpedo in state.torpedoes:
+        t_rect = torpedo.rect()
+        for upgrade in state.upgrades[:]:
+            if upgrade.collides_with(t_rect):
+                state.upgrades.remove(upgrade)
+    return []
+
+def bomb_collisions(state):
     events = []
     
     for bomb in state.bomb_list[:]:
         if bomb.detonated:
             for enemy in state.enemies[:]:
-                # Distance check (center to center)
-                ex = enemy.x + enemy.size / 2
-                ey = enemy.y + enemy.size / 2
-                
-                dx = bomb.x - ex
-                dy = bomb.y - ey
-                distance = math.sqrt(dx*dx + dy*dy)
-                
-                if distance <= bomb.radius:
-                    state.enemies.remove(enemy)
-                    events.append({
-                        "type": "enemy_killed",
-                        "source": "bomb",
-                        "enemy": enemy
-                    })
+                state.enemies.remove(enemy)
+                events.append({
+                    "type": "enemy_killed",
+                    "source": "bomb",
+                    "enemy": enemy,
+                    "is_bomb_kill": True
+                })
             
-            # Remove bomb after detonation effect
+            for planet in state.planets[:]:
+                state.planets.remove(planet)
+                state.planets_destroyed += 1
+                events.append({
+                    "type": "planet_destroyed",
+                    "source": "bomb",
+                    "planet": planet,
+                    "is_bomb_kill": True
+                })
+            
+            for upgrade in state.upgrades[:]:
+                state.upgrades.remove(upgrade)
+                events.append({
+                    "type": "upgrade_destroyed",
+                    "source": "bomb",
+                    "upgrade": upgrade,
+                    "is_bomb_kill": False
+                })
+            
             state.bomb_list.remove(bomb)
             
     return events
@@ -133,7 +162,9 @@ def player_planet_collisions(state):
         if player_rect.colliderect(planet.rect()):
             state.planets.remove(planet)
             events.append({
-                "type": "player_hit",
-                "planet": planet
+                "type": "player_hit by planet",
+                "source": "player",
+                "planet": planet,
+                "is_bomb_kill": False
             })
     return events

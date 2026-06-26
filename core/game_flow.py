@@ -3,13 +3,11 @@
 import pygame
 import sys
 
-import systems.achievements
 import services.audio
 from  rendering import background
 import config
 from services import login
 import ui.ui
-import systems.weapons
 
 def stop_game(should_play_sound, state, sounds = None):
     if should_play_sound and sounds:
@@ -33,6 +31,7 @@ def attempt_restart(state, screen, reg_font, small_font, sounds = None):
     if user and login.spend_token(state.current_user["username"]):
         return restart_game(state)
     
-    message_screen(screen, reg_font, small_font, "ACCESS DENIED", "You do not have enough tokens.", "Please contact an administator to purchase more tokens.")
+    ui.ui.message_screen(screen, reg_font, small_font, "ACCESS DENIED", "You do not have enough tokens.", "Please contact an administator to purchase more tokens.")
     stop_game(False, state, sounds)
+    return None
         

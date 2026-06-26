@@ -1,12 +1,12 @@
 #ui.py
-
+from ui import button
 from ui.colors import Color
 import config
 import pygame
 from services import login
 from systems import achievements
 
-def draw_hud(screen, state, reg_font, small_font, high_score, hud_icons):
+def draw_hud(screen, state, reg_font, small_font, high_score, hud_icons, quit_button):
 
     tokens_text = reg_font.render(f"{login.get_tokens(state.current_user['username'])}", True, Color.BROWN)
     lives_text = reg_font.render(f"{state.lives}", True, Color.GOLD)
@@ -75,9 +75,11 @@ def draw_hud(screen, state, reg_font, small_font, high_score, hud_icons):
         center = (config.WIDTH - achievements_text.get_width()) // 2    
 
         screen.blit(achievements_text, (center, 80))
+    
+    if quit_button:
+        quit_button.draw(screen, reg_font, Color, Color.RED, Color.WHITE)
 
-
-def draw_game_over(screen, state, reg_font, small_font, performance):
+def draw_game_over(screen, state, reg_font, small_font, performance, quit_button):
     completion_text = reg_font.render("Training Simulation Complete", True, Color.YELLOW)
     performance_text = reg_font.render(f"Performance Analysis: {performance}", True, Color.SILVER)
     restart_text = reg_font.render("Press [SPACE] to Restart", True, Color.WHITE)
@@ -91,8 +93,11 @@ def draw_game_over(screen, state, reg_font, small_font, performance):
     screen.blit(owner_text, (config.WIDTH // 2 - owner_text.get_width() // 2, config.HEIGHT // 2 + 90))
     screen.blit(cookies_text, (config.WIDTH // 2 - cookies_text.get_width() // 2, config.HEIGHT // 2 + 140))
     screen.blit(tampering_notice_text, (config.WIDTH/2 - tampering_notice_text.get_width() // 2, config.HEIGHT // 2 + 190))
+    
+    if quit_button:
+        quit_button.draw(screen, reg_font, Color, Color.RED, Color.WHITE)
 
-def draw_pause_menu(screen, state, reg_font, pause_buttons):
+def draw_pause_menu(screen, state, reg_font, pause_buttons, quit_button):
 
     overlay = pygame.Surface((config.WIDTH, config.HEIGHT))
     overlay.set_alpha(150)
@@ -109,12 +114,14 @@ def draw_pause_menu(screen, state, reg_font, pause_buttons):
     screen.blit(gun_accuracy_text, (config.WIDTH // 2 - gun_accuracy_text.get_width() // 2, config.HEIGHT // 2 +50))
 
     for button in pause_buttons:
-            button.draw(screen, reg_font, Color)
-            
+            button.draw(screen, reg_font, Color, Color.LIGHT_GRAY, Color.WHITE)
+    
+    if quit_button:
+        quit_button.draw(screen, reg_font, Color, Color.RED, Color.WHITE)
 
 
 
-def message_screen(screen, reg_font, small_font, title, message, message_2):
+def message_screen(screen, reg_font, small_font, title, message, message_2, quit_button):
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -136,6 +143,8 @@ def message_screen(screen, reg_font, small_font, title, message, message_2):
 
         screen.blit(info_text, (config.WIDTH // 2 - info_text.get_width() // 2, 480))
         
+        if quit_button:
+            quit_button.draw(screen, reg_font, Color, Color.RED, Color.WHITE)
 
         pygame.display.flip()
 
@@ -160,6 +169,11 @@ def draw_achievements_screen(screen, state, reg_font, small_font, achievements_b
         screen.blit(description_text, (500, starting_blit_position))
 
         starting_blit_position += blit_increment
-        for button in achievements_buttons:
-            button.draw(screen, reg_font, Color)
+    
+    for button in achievements_buttons:
+        button.draw(screen, reg_font, Color, Color.RED, Color.WHITE)
+    
+    if quit_button:
+        quit_button.draw(screen, reg_font, Color, Color.RED, Color.WHITE)
+
    

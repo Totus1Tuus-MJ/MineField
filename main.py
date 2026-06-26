@@ -4,7 +4,6 @@ import pygame
 
 from core import game_flow, game_events, setup
 from core.state import State
-import entities
 import systems
 from systems.difficulty import update_difficulty
 import rendering.renderer as rendering
@@ -19,7 +18,7 @@ if user is None:
     game_flow.stop_game(False, state, None)
 
 state.load_user(user)
-high_score, sprites, sounds, hud_icons, pause_buttons, achievements_buttons = setup.post_login_init(state, screen, reg_font, small_font)
+high_score, sprites, sounds, hud_icons, pause_buttons, achievements_buttons, quit_button = setup.post_login_init(state, screen, reg_font, small_font)
 
 running = True
 while running:
@@ -51,7 +50,7 @@ while running:
         systems.achievements.check(state)
 
     # 8. RENDER
-    rendering.draw_game(screen, state, sprites, reg_font, small_font, high_score, pause_buttons, achievements_buttons, hud_icons)
+    rendering.draw_game(screen, state, sprites, reg_font, small_font, high_score, pause_buttons, achievements_buttons, hud_icons, quit_button)
 
     pygame.display.flip()
 
