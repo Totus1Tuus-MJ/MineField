@@ -21,16 +21,46 @@
         "stat": "enemies_destroyed",
         "goal": 1000
     },
+    "Point of No Return": {
+        "description": "I got a score of 10000",
+        "stat": "score",
+        "goal": 10000
+    },
+
+    "A Voyage Without End":{
+        "description": "I passed 50000 points",
+        "stat": "score",
+        "goal": 50001
+    },
+
     "Renovator": {
         "description": "I collected my first upgrade",
-	  "stat": "upgrades_collected",
+	    "stat": "upgrades_collected",
         "goal": 1
     },
 
-    "Collector": {
+    "I'll need a Garage Sale": {
+        "description": "I collected 15 upgrades",
+        "stat": "upgrades_collected",
+        "goal": 15
+    },
+
+    "I'll need an Estate Sale": {
         "description": "I collected 25 upgrades",
         "stat": "upgrades_collected",
         "goal": 25
+    },
+
+    "Collector": {
+        "description": "I collected 30 upgrades",
+        "stat": "upgrades_collected",
+        "goal": 30
+    },
+
+    "Auction Pending": {
+        "description": "I collected 50 upgrades",
+        "stat": "upgrades_collected",
+        "goal": 50
     },
 
     "Basic Bomb Boy": {
@@ -48,6 +78,12 @@
         "description": "I used 50 bombs",
         "stat": "bombs_used",
         "goal": 50
+    },
+
+    "Nuclear Fallout Imminent": {
+        "description": "I used 75 nuclear bombs",
+        "stat": "bombs_used",
+        "goal": 75
     },
 
     "Torpedo Novice": {
@@ -89,6 +125,12 @@
         "stat": "planet_collisions",
         "goal": 1
     },
+    "All Hail the System Controller": {
+        "description": "I vanquished 25 planets",
+        "stat": "planets_destroyed",
+        "goal": 25
+    },
+
     "Danger Lover": {
         "description": "I collided with 5 planets",
         "stat": "planet_collisions",
@@ -108,6 +150,9 @@
 
     "Sniper": {
         "description": "My shooting accuracy reached 90% with 250 shots"
+    },
+    "Hawkeye": {
+        "description": "My shooting accuracy reached 95% with 1000 shots"
     },
 
     "Untouchable": {

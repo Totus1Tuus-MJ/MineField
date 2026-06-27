@@ -4,75 +4,41 @@
             "username": "Mario Wilson",
             "password": "1fluffykoala@",
             "role": "admin",
-            "tokens": 999999,
-            "achievements": [
-                "First Blood",
-                "Renovator",
-                "Planetary Warfare",
-                "Untouchable",
-                "Basic Bomb Boy",
-                "Serial Killer",
-                "Sniper",
-                "Escape Artist"
-            ]
+            "tokens": 25
         },
         {
             "username": "Peter",
             "password": "Peter",
             "role": "user",
-            "tokens": 5,
-            "achievements": [
-                "First Blood",
-                "Renovator",
-                "Escape Artist",
-                "Basic Bomb Boy",
-                "Bomberman",
-                "Sniper"
-            ]
+            "tokens": 1
         },
         {
             "username": "Anna",
-            "password": "Anna",
+            "password": "grunt",
             "role": "user",
-            "tokens": 1,
-            "achievements": [
-                "First Blood",
-                "Renovator",
-                "Basic Bomb Boy",
-                "Planetary Warfare",
-                "Sniper",
-                "Serial Killer",
-                "Bomberman",
-                "Untouchable",
-                "Torpedo Novice",
-                "Escape Artist",
-                "Slaughterer",
-                "Death Star"
-            ]
+            "tokens": 1
         },
         {
             "username": "Mom",
             "password": "Wilson*",
             "role": "user",
-            "tokens": 5
+            "tokens": 1
         },
         {
             "username": "Bern",
             "password": "Bern",
             "role": "user",
-            "tokens": 5
+            "tokens": 1
         },
         {
             "username": "Miles",
             "password": "puffin",
             "role": "admin",
-            "tokens": 4,
+            "tokens": 1,
             "achievements": [
                 "First Blood",
-                "Renovator",
                 "Untouchable",
                 "Escape Artist",
-                "Sniper",
                 "Planetary Warfare",
                 "Basic Bomb Boy",
                 "Serial Killer",
@@ -89,29 +55,15 @@
             "username": "",
             "password": "",
             "role": "user",
-            "tokens": 139778,
+            "tokens": 9999999999999999999998,
             "achievements": [
                 "First Blood",
                 "Renovator",
                 "Escape Artist",
-                "Torpedo Novice",
                 "Basic Bomb Boy",
-                "Untouchable",
-                "Bomberman",
                 "Serial Killer",
                 "Planetary Warfare",
-                "Nuker",
-                "Slaughterer",
-                "Torpedo Expert",
-                "Collector",
-                "Mass Murderer",
-                "Emergency Landing",
-                "Death Star",
-                "Grenadier",
-                "Torpedo Master",
-                "Torpedo Wizard",
-                "Danger Lover",
-                "Sniper"
+                "Bomberman"
             ]
         }
     ]

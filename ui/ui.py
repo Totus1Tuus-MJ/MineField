@@ -1,7 +1,6 @@
 #ui.py
-from ui import button
 from ui.colors import Color
-import config
+from core import config
 import pygame
 from services import login
 from systems import achievements
@@ -110,8 +109,9 @@ def draw_pause_menu(screen, state, reg_font, small_font, pause_buttons, quit_but
     resume_text = reg_font.render("Press P to Resume", True, Color.WHITE)
     gun_accuracy_text = reg_font.render(f"Gun Accuracy: {int(state.accuracy * 100)}%", True, Color.RED)
     screen.blit(pause_text, (config.WIDTH // 2 - pause_text.get_width() // 2, config.HEIGHT // 2 - 50))
-    screen.blit(resume_text,(config.WIDTH // 2 - resume_text.get_width() // 2, config.HEIGHT // 2 + 10))
-    screen.blit(gun_accuracy_text, (config.WIDTH // 2 - gun_accuracy_text.get_width() // 2, config.HEIGHT // 2 +50))
+
+    screen.blit(resume_text, (config.WIDTH // 2 - resume_text.get_width() // 2, config.HEIGHT // 2 + 10))
+    screen.blit(gun_accuracy_text, (config.WIDTH // 2 - gun_accuracy_text.get_width() // 2, config.HEIGHT // 2 + 50))
     draw_rights(screen,small_font)
 
     for button in pause_buttons:
@@ -170,7 +170,7 @@ def draw_achievements_screen(screen, state, reg_font, small_font, achievements_b
 
         description_text = reg_font.render(achievement["description"], True, Color.LIGHT_GRAY)
         screen.blit(name_text, (100, starting_blit_position))
-        screen.blit(description_text, (500, starting_blit_position))
+        screen.blit(description_text, (750, starting_blit_position))
         starting_blit_position += blit_increment
 
     draw_rights(screen,small_font)

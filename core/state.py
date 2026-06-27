@@ -32,6 +32,9 @@ class State:
         self.music_off = False
         self.sounds_off = False
         self.movement_sound_playing = False
+        self.firing_mode = True
+        self.bomb_mode = True
+        self.torpedo_mode = True
 
         ## ==========================================
 
@@ -68,15 +71,22 @@ class State:
         ## Enemies
         ## ==========================================
         self.enemies = []
+        self.enemy_size = 50
+
         self.enemy_speed = 250
         self.spawn_delay = 500
         self.last_spawn = 0
         self.spawn_delay_benefit = 0
 
-        self.enemy_size = 50
-        self.max_enemies = 40
-        self.max_enemy_speed = 1500
-        self.min_spawn_delay = 10
+
+        if self.firing_mode:
+            self.max_enemies = 40
+            self.max_enemy_speed = 1500
+            self.min_spawn_delay = 10
+        else:
+            self.max_enemies = 25
+            self.max_enemy_speed = 700
+            self.min_spawn_delay = 25
 
 
         ## ==========================================
@@ -154,4 +164,5 @@ class State:
         self.achievement_timer = 0
 
         self.damage_timer = 0
+        self.highscore_token_awarded = False
         self.stabilization_time = 3000

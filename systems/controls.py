@@ -1,8 +1,7 @@
 ## controls.py
 
 import pygame
-import config
-from core import game_flow
+from core import game_flow, config
 from services import audio
 from systems import weapons
 
@@ -95,6 +94,17 @@ def handle_pause_input(event, state):
                 audio.toggle_sounds(state)
             elif event.key == pygame.K_m:
                 audio.toggle_music(state)
+            elif event.key == pygame.K_n:
+                audio.toggle_noises(state)
+            elif event.key == pygame.K_f:
+                weapons.toggle_firing(state)
+            elif event.key == pygame.K_b:
+                weapons.toggle_bombs(state)
+            elif event.key == pygame.K_t:
+                weapons.toggle_torpedoes(state)
+            elif event.key == pygame.K_g:
+                weapons.toggle_general(state)
+
     elif state.show_achievements:
         if event.type == pygame.MOUSEBUTTONDOWN:
             quit_button = getattr(state, 'quit_button', None)
@@ -127,18 +137,18 @@ def handle_game_going_input(state, keys):
             if "player_movement" in sounds:
                 sounds["player_movement"].stop()
             state.movement_sound_playing = False
-            
-    if keys[pygame.K_SPACE]:
-        if weapons.fire_gun(state):
-            audio.play_sound(state, sounds.get("bullet"))
-
-    if keys[pygame.K_b]:
-        if weapons.launch_bomb(state):
-            audio.play_sound(state, sounds.get("bomb"))
-
-    if keys[pygame.K_t]:
-        if weapons.launch_torpedo(state):
-            audio.play_sound(state, sounds.get("torpedo"))
+    if state.firing_mode:
+        if keys[pygame.K_SPACE]:
+            if weapons.fire_gun(state):
+                audio.play_sound(state, sounds.get("bullet"))
+    if state.bomb_mode:
+        if keys[pygame.K_b]:
+            if weapons.launch_bomb(state):
+                audio.play_sound(state, sounds.get("bomb"))
+    if state.torpedo_mode:
+        if keys[pygame.K_t]:
+            if weapons.launch_torpedo(state):
+                audio.play_sound(state, sounds.get("torpedo"))
     if keys[pygame.K_r]:
         game_flow.attempt_restart(state, getattr(state, 'screen', None), getattr(state, 'reg_font', None), getattr(state, 'small_font', None))
 

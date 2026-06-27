@@ -5,7 +5,7 @@ import sys
 
 import services.audio
 from  rendering import background
-import config
+from core import config
 from services import login
 import ui.ui
 
@@ -28,10 +28,12 @@ def restart_game(state):
 
 def attempt_restart(state, screen, reg_font, small_font, sounds = None):
     user = getattr(state, "current_user", None)
-    if user and login.spend_token(state.current_user["username"]):
+    if user and login.spend_token(state.current_user["username"], user):
         return restart_game(state)
     
     ui.ui.message_screen(screen, reg_font, small_font, "ACCESS DENIED", "You do not have enough tokens.", "Please contact an administator to purchase more tokens.", quit_button = None)
     stop_game(False, state, sounds)
     return None
-        
+
+
+

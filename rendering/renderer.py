@@ -3,8 +3,8 @@ import pygame
 from ui.colors import Color
 from ui.ui import draw_hud, draw_game_over, draw_pause_menu, draw_achievements_screen, draw_instructions_screen
 
+from core import config
 
-import config
 
 def draw_game(screen, state, sprites, reg_font, small_font, high_score, pause_buttons, achievements_buttons, hud_icons, quit_button):
     screen.fill(Color.BLACK)

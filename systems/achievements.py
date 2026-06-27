@@ -46,6 +46,9 @@ def unlock(state, name):
     if state.current_user is None:
         return
     
+    # Award token for achievement
+    login.add_token(state.current_user["username"], state.current_user)
+    
     user = state.current_user
     if "achievements" not in user:
         user["achievements"] = []
@@ -71,6 +74,8 @@ def check_manual(state):
 
     if (state.accuracy >= 0.9 and state.shots_fired >= 250):
         unlock(state, "Sniper")
+    if (state.accuracy >= 0.95 and state.shots_fired >= 1000):
+        unlock(state, "Hawkeye")
     if (state.score >= 500 and state.lives == 3 and state.shields_lost == 0):
         unlock(state, "Untouchable")
     if (state.lives == 1 and state.shields == 0):

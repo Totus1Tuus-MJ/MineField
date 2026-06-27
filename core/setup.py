@@ -2,10 +2,8 @@
 
 import pygame
 
-import config
-from core import game_flow
+from core import game_flow, button_setup, config
 from services import asset_loader
-from ui.button import Button
 
 def pre_login_init():
 
@@ -27,19 +25,10 @@ def post_login_init(state, screen, reg_font, small_font):
     hud_icons = asset_loader.load_hud_icons()
     sprites = asset_loader.load_images(state)
     sounds = asset_loader.load_sounds()
-    hud_icons = asset_loader.load_hud_icons()
     asset_loader.load_music()
-    quit_button = Button(pygame.Rect(1440, 0, 100, 50), lambda: f"[Q]UIT", lambda: game_flow.stop_game(True, state, sounds))
+    
+    pause_buttons, achievements_buttons, quit_button = button_setup.create_buttons(state, screen, reg_font, small_font, sounds)
 
-    music_button = Button(pygame.Rect(200, 200, 200, 50), lambda: f"Music: {'ON' if not state.music_off else 'OFF'}", lambda: game_flow.toggle_music(state))
-    sounds_button = Button(pygame.Rect(config.WIDTH - 400, 200, 200, 50), lambda: f"[S]ounds: {'ON' if not state.sounds_off else 'OFF'}", lambda: game_logic.toggle_sounds(state))
-    restart_button = Button(pygame.Rect(config.WIDTH - 400, 600, 200, 50), lambda: f"[R]ESTART", lambda: game_flow.attempt_restart(state, screen, reg_font, small_font))
-    pause_buttons = [music_button, sounds_button, restart_button]
-
-    return_to_pause_button = Button(pygame.Rect(config.WIDTH - 400,200, 200, 50), lambda: f"[B]ACK", lambda: setattr(state, "show_achievements", False))
-    return_to_game_button = Button(pygame.Rect(config.WIDTH - 400, 275, 200, 50), lambda: f"[P]LAY", lambda: (setattr(state, "game_going", True), setattr(state, "paused", False), setattr(state, "show_achievements", False)))
-    restart_button = Button(pygame.Rect(config.WIDTH - 400, 425, 200, 50), lambda: f"[R]ESTART", lambda: game_flow.attempt_restart(state, screen, reg_font, small_font))
-    achievements_buttons = [return_to_pause_button, return_to_game_button, restart_button]
     state.sounds = sounds
     state.pause_buttons = pause_buttons
     state.achievements_buttons = achievements_buttons

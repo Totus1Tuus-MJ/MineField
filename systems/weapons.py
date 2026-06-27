@@ -4,6 +4,7 @@ import pygame
 from entities.bullet import Bullet
 from entities.bomb import Bomb
 from entities.torpedo import Torpedo
+from systems import difficulty
 
 
 def fire_gun(state):
@@ -68,3 +69,38 @@ def launch_torpedo(state):
         return True
 
     return False
+
+
+def toggle_firing(state):
+    state.firing_mode = not state.firing_mode
+    difficulty.update_difficulty_modes(state)
+    if not state.firing_mode:
+        state.bullets = []
+
+def toggle_bombs(state):
+    state.bomb_mode = not state.bomb_mode
+    difficulty.update_difficulty_modes(state)
+    if not state.bomb_mode:
+        state.bomb_list = []
+
+def toggle_torpedoes(state):
+    state.torpedo_mode = not state.torpedo_mode
+    difficulty.update_difficulty_modes(state)
+    if not state.torpedo_mode:
+        state.torpedoes = []
+
+def toggle_general(state):
+    # If any mode is ON, turn them all OFF.
+    if state.firing_mode or state.bomb_mode or state.torpedo_mode:
+        state.firing_mode = False
+        state.bomb_mode = False
+        state.torpedo_mode = False
+        state.bullets = []
+        state.bomb_list = []
+        state.torpedoes = []
+    else:
+        # If all were OFF, turn them all ON.
+        state.firing_mode = True
+        state.bomb_mode = True
+        state.torpedo_mode = True
+    difficulty.update_difficulty_modes(state)

@@ -1,10 +1,8 @@
 ## movement.py
 
 import random
-from services import audio
-import config
-from entities.explosion import Explosion
-from entities.upgrade import Upgrade
+from core import config
+
 
 def move_planets(state, dt):
     for planet in state.planets[:]:

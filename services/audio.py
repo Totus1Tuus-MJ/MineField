@@ -15,3 +15,14 @@ def toggle_music(state):
 
 def toggle_sounds(state):
     state.sounds_off = not state.sounds_off
+
+def toggle_noises(state):
+    if not state.sounds_off or not state.music_off:
+        state.sounds_off = True
+        state.music_off = True
+        pygame.mixer.music.pause()
+    else:
+        state.music_off = False
+        state.sounds_off = False
+        pygame.mixer.music.unpause()
+

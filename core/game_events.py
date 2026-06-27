@@ -38,6 +38,10 @@ def handle_events(state, events, sounds):
 
             if state.lives <= 0:
                 state.game_over = True
+                if "game_over" in sounds:
+                    for s in sounds.values():
+                        s.stop()
+                    audio.play_sound(state, sounds["game_over"])
 
         elif event["type"] == "player_hit by planet":
             # Planet collision severely wounds but doesn't kill

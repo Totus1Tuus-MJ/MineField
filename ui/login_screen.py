@@ -4,7 +4,8 @@ import pygame
 from services.login import check_credentials
 from ui.colors import Color
 from ui.ui import message_screen
-import config
+from core import config
+
 
 def login_screen(screen, reg_font, small_font, quit_button):
     username = ""
@@ -34,7 +35,8 @@ def login_screen(screen, reg_font, small_font, quit_button):
         screen.blit(instructions_text, (250, 800))
         screen.blit(owner_text, (config.WIDTH // 2 - owner_text.get_width() // 2, config.HEIGHT // 2 + 90))
         screen.blit(cookies_text, (config.WIDTH // 2 - cookies_text.get_width() // 2, config.HEIGHT // 2 + 140))
-        screen.blit(tampering_notice_text, (config.WIDTH/2 - tampering_notice_text.get_width() // 2, config.HEIGHT // 2 + 190))
+        screen.blit(tampering_notice_text, (
+            config.WIDTH / 2 - tampering_notice_text.get_width() // 2, config.HEIGHT // 2 + 190))
         screen.blit(rights_text, (10, 975))
 
         pygame.display.flip()

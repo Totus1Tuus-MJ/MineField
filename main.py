@@ -2,12 +2,13 @@
 
 import pygame
 
-from core import game_flow, game_events, setup
+from core import game_flow, game_events, setup, config
 from core.state import State
 import systems
 from systems.difficulty import update_difficulty
 import rendering.renderer as rendering
 from ui.login_screen import login_screen
+from services import login
 
 state = State(width=1550, height=950)
 screen, reg_font, small_font, clock = setup.pre_login_init()
@@ -51,6 +52,15 @@ while running:
 
     # 8. RENDER
     rendering.draw_game(screen, state, sprites, reg_font, small_font, high_score, pause_buttons, achievements_buttons, hud_icons, quit_button)
+
+    # Update highscore and award token in session
+    if state.score > high_score:
+        high_score = state.score
+        config.save_highscore(high_score)
+        # Award token for beating highscore (only once per session when passing it)
+        if not getattr(state, "highscore_token_awarded", False):
+            login.add_token(state.current_user["username"], state.current_user)
+            state.highscore_token_awarded = True
 
     pygame.display.flip()
 

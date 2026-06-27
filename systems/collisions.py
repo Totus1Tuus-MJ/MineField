@@ -28,6 +28,7 @@ def bullet_enemy_collisions(state):
                 if bullet in state.bullets:
                     state.bullets.remove(bullet)
                 state.enemies.remove(enemy)
+                state.hits += 1
 
                 events.append({
                     "type": "enemy_killed",

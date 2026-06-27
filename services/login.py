@@ -27,16 +27,29 @@ def check_credentials(username, password):
         if (user["username"] == username and user["password"] == password):
             return user
     return None
-def spend_token(username):
+def spend_token(username, state_user = None):
     data = load_directory()
     for user in data["users"]:
         if user["username"] == username:
             if user["tokens"] <= 0:
                 return False
             user["tokens"] -= 1
+            if state_user and state_user["username"] == username:
+                state_user["tokens"] = user["tokens"]
             save_directory(data)
             return True
         
+    return False
+
+def add_token(username, state_user = None):
+    data = load_directory()
+    for user in data["users"]:
+        if user["username"] == username:
+            user["tokens"] += 1
+            if state_user and state_user["username"] == username:
+                state_user["tokens"] = user["tokens"]
+            save_directory(data)
+            return True
     return False
 
 def get_tokens(username):
