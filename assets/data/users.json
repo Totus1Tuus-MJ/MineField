@@ -34,7 +34,27 @@
             "username": "Anna",
             "password": "Anna",
             "role": "user",
-            "tokens": 3
+            "tokens": 1,
+            "achievements": [
+                "First Blood",
+                "Renovator",
+                "Basic Bomb Boy",
+                "Planetary Warfare",
+                "Sniper",
+                "Serial Killer",
+                "Bomberman",
+                "Untouchable",
+                "Torpedo Novice",
+                "Escape Artist",
+                "Slaughterer",
+                "Death Star"
+            ]
+        },
+        {
+            "username": "Mom",
+            "password": "Wilson*",
+            "role": "user",
+            "tokens": 5
         },
         {
             "username": "Bern",
@@ -43,10 +63,33 @@
             "tokens": 5
         },
         {
+            "username": "Miles",
+            "password": "puffin",
+            "role": "admin",
+            "tokens": 4,
+            "achievements": [
+                "First Blood",
+                "Renovator",
+                "Untouchable",
+                "Escape Artist",
+                "Sniper",
+                "Planetary Warfare",
+                "Basic Bomb Boy",
+                "Serial Killer",
+                "Bomberman",
+                "Torpedo Novice",
+                "Death Star",
+                "Slaughterer",
+                "Mass Murderer",
+                "Torpedo Expert",
+                "Grenadier"
+            ]
+        },
+        {
             "username": "",
             "password": "",
             "role": "user",
-            "tokens": 139795,
+            "tokens": 139778,
             "achievements": [
                 "First Blood",
                 "Renovator",

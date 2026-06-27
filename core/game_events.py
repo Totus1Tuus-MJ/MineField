@@ -1,5 +1,6 @@
 ## game_events.py
 
+import pygame
 from services import audio
 from entities.explosion import Explosion
 from systems.upgrade_effects import grant_reward
@@ -22,7 +23,14 @@ def handle_events(state, events, sounds):
                 audio.play_sound(state, sounds["enemy"])
 
         elif event["type"] == "player_hit":
-            audio.play_sound(state,sounds["death"])
+            state.damage_timer = pygame.time.get_ticks()
+            
+            # Death sound override
+            if "death" in sounds:
+                for s in sounds.values():
+                    s.stop()
+                audio.play_sound(state, sounds["death"])
+
             if state.shields > 0:
                 state.shields -= 1
             else:
@@ -32,15 +40,23 @@ def handle_events(state, events, sounds):
                 state.game_over = True
 
         elif event["type"] == "player_hit by planet":
+            # Planet collision severely wounds but doesn't kill
             state.shields = 0
             state.lives = 1
             state.score += 100
+            
+            state.damage_timer = pygame.time.get_ticks()
+
+            # Death sound override (using bomb_loud as planet impact)
+            if "bomb_loud" in sounds:
+                for s in sounds.values():
+                    s.stop()
+                audio.play_sound(state, sounds["bomb_loud"])
             
             planet = event["planet"]
             state.explosions.append(
                 Explosion(planet.x, planet.y, max_radius = planet.radius * 3)
             )
-            audio.play_sound(state, sounds["bomb_loud"])
 
         elif event["type"] == "planet_destroyed":
             state.score += 100

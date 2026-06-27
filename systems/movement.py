@@ -26,6 +26,7 @@ def move_enemies(state, dt):
 
         if enemy.off_screen(config.HEIGHT):
             state.enemies.remove(enemy)
+            state.score += 5
 
 def move_upgrades(state, dt):
     for upgrade in state.upgrades[:]:

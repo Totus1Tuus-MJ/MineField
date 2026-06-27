@@ -74,9 +74,9 @@ class State:
         self.spawn_delay_benefit = 0
 
         self.enemy_size = 50
-        self.max_enemies = 50
+        self.max_enemies = 40
         self.max_enemy_speed = 1500
-        self.min_spawn_delay = 25
+        self.min_spawn_delay = 10
 
 
         ## ==========================================
@@ -114,7 +114,7 @@ class State:
         self.torpedo_x_size = 67
         self.torpedo_y_size = 100
         self.torpedo_speed = 1200
-        self.torpedo_reload = 1500
+        self.torpedo_reload = 2500
 
         ## ==========================================
         ## Upgrades
@@ -152,3 +152,6 @@ class State:
         self.achievements_completed, self.total_achievements = achievements.get_achievement_progress(self)
         self.achievement_message = ""
         self.achievement_timer = 0
+
+        self.damage_timer = 0
+        self.stabilization_time = 3000

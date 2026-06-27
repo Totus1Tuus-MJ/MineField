@@ -1,4 +1,5 @@
 ## drawing.py
+import pygame
 from ui.colors import Color
 from ui.ui import draw_hud, draw_game_over, draw_pause_menu, draw_achievements_screen, draw_instructions_screen
 
@@ -22,10 +23,13 @@ def draw_game(screen, state, sprites, reg_font, small_font, high_score, pause_bu
         torpedo.draw(screen, sprites["torpedo"])
     for bomb in state.bomb_list:
         bomb.draw(screen, sprites["bomb"])
+    explosion_color = Color.RED if pygame.time.get_ticks() - state.damage_timer < state.stabilization_time else Color.ORANGE
     for explosion in state.explosions:
-        explosion.draw(screen, Color.ORANGE)
+        explosion.draw(screen, explosion_color)
 
-    state.player.draw(screen, sprites["player"], Color.GREEN, state.shields, 1)
+    # Determine shield color based on damage timer
+    shield_color = Color.RED if pygame.time.get_ticks() - state.damage_timer < state.stabilization_time else Color.GREEN
+    state.player.draw(screen, sprites["player"], shield_color, state.shields, 1)
 
     draw_hud(screen, state, reg_font, small_font, high_score, hud_icons, quit_button)
 

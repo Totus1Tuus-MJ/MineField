@@ -78,6 +78,11 @@ def draw_hud(screen, state, reg_font, small_font, high_score, hud_icons, quit_bu
 
         screen.blit(achievements_text, (center, 80))
     
+    # Mission Critical warning
+    if current_time - state.damage_timer < 1000:
+        critical_text = reg_font.render("MISSION CRITICAL", True, Color.RED)
+        screen.blit(critical_text, ((config.WIDTH - critical_text.get_width()) // 2, config.HEIGHT // 2 + 100))
+
     if quit_button:
         quit_button.draw(screen, reg_font, Color, Color.RED, Color.WHITE)
 
